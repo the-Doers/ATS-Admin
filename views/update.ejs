@@ -1,0 +1,42 @@
+<%- include("partials/header") -%>
+<h1>Update Passenger Details</h1>
+<form method="POST">
+    <div class="padding row form-group">
+        <div class="col-md-4">
+            <label for="name">Passenger ID</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+    </div>
+    <div class="padding row form-group">
+        <div class="col-md-4">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
+    </div>
+    <div class="padding row form-group">
+        <div class="col-md-4">
+            <label for="number">Mobile Number</label>
+            <input type="text" class="form-control" id="number" name="number">
+        </div>
+    </div>
+    <div class="padding row form-group">
+        <div class="col-md-4">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+    </div>
+    <div class="padding row form-group">
+        <div class="col-md-8">
+            <label for="number">Address</label>
+            <input type="text" class="form-control" id="address" name="address">
+        </div>
+    </div>
+    <div class="padding row form-group">
+        <div class="col-md-4">
+            <label for="number">Images</label>
+            <input type="file" class="form-control" id="file" name="file" multiple>
+        </div>
+    </div>
+    <button type="submit" class="padding btn btn-lg btn-primary">Add Details!</button>
+</form>
+<%- include("partials/footer") -%>
