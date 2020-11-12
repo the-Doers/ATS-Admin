@@ -3,21 +3,29 @@
 <form method="POST">
     <div class="padding row form-group">
         <div class="col-md-4">
-            <label for="ss">Starting Station</label>
-            <select name="stations" id="stations">
+            <label for="ss"><h3>Starting Station:</h3></label>
+            <h4 class="font-semibold">
+                <select class="btn btn-secondary white-text dropdown-toggle" name="ss" id="ss">
                 <% for (const i in data) { %>
-            <option value="<%= data[i].SID %>"> <%= data[i].SName %> </option>
+            <option class="dropdown-item white-text font-semibold" value="<%= data[i].SID %>"> <%= data[i].SName %> </option>
         <% } %>
             </select>
-            <!-- <input type="text" class="form-control" id="ss" name="ss"> -->
+            </h4>
         </div>
     </div>
     <div class="padding row form-group">
         <div class="col-md-4">
-            <label for="es">Ending Station</label>
-            <input type="text" class="form-control" id="es" name="es">
+            <label for="es"><h3>Ending Station:</h3></label>
+            <h4 class="font-semibold">
+                <select class="btn btn-secondary white-text dropdown-toggle" name="es" id="es">
+                <% for (const i in data) { %>
+            <option class="dropdown-item white-text font-semibold" value="<%= data[i].SID %>"> <%= data[i].SName %> </option>
+        <% } %>
+            </select>
+            </h4>
         </div>
     </div>
+    <h4>The value inserted here will have Passenger ID = 1</h4>
     <button type="submit" class="padding btn btn-lg btn-primary">Issue Token</button>
 </form>
 </div>

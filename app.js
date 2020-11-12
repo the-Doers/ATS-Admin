@@ -54,8 +54,24 @@ app.get("/token", (req, res) => {
 });
 
 app.post("/token", (req, res) => {
-  
-})
+  const startStation = req.body.ss;
+  const endStation = req.body.es;
+  const fare = Math.abs(startStation - endStation);
+  const dateAndTime = new Date();
+  console.log(dateAndTime);
+  connection.query(
+    "insert into TravelRecord (PID, StartID, EndID, StartTime, EndTime, Fare) values (?)",
+    [[1, startStation, endStation, dateAndTime, dateAndTime, fare]],
+    (error, result) => {
+      if (error) {
+        console.log("Error:", error);
+      } else {
+        console.log("Result:", result);
+        res.redirect("/orders/");
+      }
+    }
+  );
+});
 
 app.get("/delete", (req, res) => {
   res.render("delete");

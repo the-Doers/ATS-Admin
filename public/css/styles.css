@@ -3,10 +3,33 @@ body {
   font-weight: 800;
 }
 
-h1, h2, h3 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 900;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
 }
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.white-text {
+  color: white;
+}
+
+.dropdown-item,
+.dropdown-toggle {
+  font-weight: 500 !important;
+}
+
+/* select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+} */
 
 .container-fluid {
   padding-top: 70px;
@@ -23,8 +46,8 @@ h1, h2, h3 {
   letter-spacing: 5px;
   color: #fff;
   font-style: unset;
-  background-color: #9A6391;
-  background-image: linear-gradient(45deg, #9A6391 0%, #8C4671 74%);
+  background-color: #9a6391;
+  background-image: linear-gradient(45deg, #9a6391 0%, #8c4671 74%);
 }
 
 .navbar-brand.brand {
@@ -46,20 +69,20 @@ h1, h2, h3 {
 }
 
 .footer-padding {
-    padding-top: 1.15rem !important;
-    padding-bottom: 1.15rem;
+  padding-top: 1.15rem !important;
+  padding-bottom: 1.15rem;
 }
 
 .footer {
-    position: absolute; 
-    display: block;
-    text-align: center;
-    width: 100%;
-    height: 50px;
-    background-color: #9A6391;
-    background-image: linear-gradient(45deg, #9A6391 0%,#8C4671 74%);
-    flex-shrink: 0;
-    margin-top: 0;
+  position: absolute;
+  display: block;
+  text-align: center;
+  width: 100%;
+  height: 50px;
+  background-color: #9a6391;
+  background-image: linear-gradient(45deg, #9a6391 0%, #8c4671 74%);
+  flex-shrink: 0;
+  margin-top: 0;
 }
 
 .footer-bottom {
@@ -92,39 +115,42 @@ a.padding {
 }
 
 .padding-sm {
-    margin: 1.5rem;
-    font-size: 1.75rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
+  margin: 1.5rem;
+  font-size: 1.75rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
 }
 
 .btn {
-    font-family: 'Inter', sans-serif;
-    font-weight: 900;
-    font-size: 1.5rem;
-    background-color: #8C4671;
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  background-color: #8c4671;
+  border-color: #8c4671;
 }
 
 .btn:hover {
-  background-color: #9A6391;
+  background-color: #9a6391;
 }
 
 .btn:focus {
-  background-color: #9A6391;
+  background-color: #9a6391;
 }
 
 .list-group {
- max-width: 55rem;
+  max-width: 55rem;
 }
 
-a.list-group-item-info, button.list-group-item-info {
-    background:  #9A6391;
-    color: white;
- border-radius: 6px !important;
+a.list-group-item-info,
+button.list-group-item-info {
+  background: #9a6391;
+  color: white;
+  border-radius: 6px !important;
 }
 
-a.list-group-item-info:hover, button.list-group-item-info:hover {
-    background:  #8C4671;
-    color: white;
- border-radius: 6px !important;
+a.list-group-item-info:hover,
+button.list-group-item-info:hover {
+  background: #8c4671;
+  color: white;
+  border-radius: 6px !important;
 }
