@@ -8,19 +8,19 @@ const { result } = require("lodash");
 
 const app = express();
 
-// let connection = mysql.createConnection({
-//     host: 'remotemysql.com',
-//     user: 'BUIYPTQ3nb',
-//     password: 'QeJzztQw2D',
-//     database: 'BUIYPTQ3nb'
-// });
+let connection = mysql.createConnection({
+  host: "remotemysql.com",
+  user: "jsdmPgLJ0k",
+  password: "t0XUXdJsm9",
+  database: "jsdmPgLJ0k",
+});
 
-// connection.connect(function (err) {
-//     if (err) {
-//         return console.error('error: ' + err.message);
-//     }
-//     console.log('Connected to the MySQL server.');
-// });
+connection.connect(function (err) {
+  if (err) {
+    return console.error("error: " + err.message);
+  }
+  console.log("Connected to the MySQL server.");
+});
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -47,8 +47,15 @@ app.get("/add", (req, res) => {
 });
 
 app.get("/token", (req, res) => {
-  res.render("token");
+  connection.query("select * from Stations", (error, result, fields) => {
+    if (error) throw error;
+    res.render("./token", { data: result });
+  });
 });
+
+app.post("/token", (req, res) => {
+  
+})
 
 app.get("/delete", (req, res) => {
   res.render("delete");
