@@ -42,18 +42,24 @@ app.get("/home", (req, res) => {
   res.render("home");
 });
 
-app.get("/add", (req, res) => {
-  res.render("add");
+//_______________________________ADD PASSENGER_______________________________//
+app.get("/addPassenger", (req, res) => {
+  res.render("addPassenger");
 });
 
-app.get("/token", (req, res) => {
+app.post("/addPassenger", (req, res) => {
+  res.render("addPassenger");
+});
+
+//_______________________________ISSUE TICKET_______________________________//
+app.get("/issueTicket", (req, res) => {
   connection.query("select * from Stations", (error, result, fields) => {
     if (error) throw error;
-    res.render("./token", { data: result });
+    res.render("./issueTicket", { data: result });
   });
 });
 
-app.post("/token", (req, res) => {
+app.post("/issueTicket", (req, res) => {
   const startStation = req.body.ss;
   const endStation = req.body.es;
   const fare = Math.abs(startStation - endStation);
@@ -66,23 +72,71 @@ app.post("/token", (req, res) => {
       if (error) {
         console.log("Error:", error);
       } else {
-        console.log("Result:", result);
-        res.redirect("/orders/");
+        console.log(result.insertId);
+        res.render("./ticketDetails", {
+          insertID: result.insertId,
+          fare: fare,
+        });
       }
     }
   );
 });
 
-app.get("/delete", (req, res) => {
-  res.render("delete");
+//_______________________________DELETE PASSENGER_______________________________//
+app.get("/deletePassenger", (req, res) => {
+  connection.query(
+    "select * from PassengerDetails",
+    (error, result, fields) => {
+      if (error) throw error;
+      res.render("deletePassenger", { data: result });
+    }
+  );
+});
+
+app.post("/deletePassenger", (req, res) => {
+  const pid = req.body.PID;
+  var message = "";
+  connection.query(
+    "DELETE FROM PassengerDetails WHERE PID=" + connection.escape(pid),
+    (error, result, fields) => {
+      if (error) throw error;
+      else {
+        message =
+          "Deleted details of " + req.body.PFName + " " + req.body.PLName;
+        res.render("./success", { message: message });
+      }
+    }
+  );
 });
 
 app.get("/update", (req, res) => {
   res.render("update");
 });
 
-app.get("/view", (req, res) => {
-  res.render("view");
+//_______________________________VIEW PASSENGER DETAILS_______________________________//
+app.get("/viewPassengerDetails", (req, res) => {
+  connection.query(
+    "select * from PassengerDetails",
+    (error, result, fields) => {
+      if (error) throw error;
+      res.render("./viewPassengerDetails", { data: result });
+    }
+  );
+});
+
+app.post("/viewPassengerDetails", (req, res) => {
+  const pid = req.body.pid;
+  connection.query(
+    "SELECT * FROM PassengerDetails WHERE PID=" + connection.escape(pid),
+    (error, result, fields) => {
+      if (error) throw error;
+      res.render("passengerDetails", { data: result });
+    }
+  );
+});
+
+app.get("/error", (req, res) => {
+  res.render("error");
 });
 
 app.listen(process.env.PORT || 3000, () => {

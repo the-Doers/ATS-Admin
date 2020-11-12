@@ -21,6 +21,10 @@ h6 {
   color: white;
 }
 
+.green-text {
+  color: rgb(66, 121, 66);
+}
+
 .dropdown-item,
 .dropdown-toggle {
   font-weight: 500 !important;
@@ -153,4 +157,14 @@ button.list-group-item-info:hover {
   background: #8c4671;
   color: white;
   border-radius: 6px !important;
+}
+
+.card {
+  background-color: #c5bdca;
+  width: fit-content;
+  height: 100%;
+  padding: 3rem;
+  border-radius: 7px;
+  margin: 2rem;
+  box-shadow: 5px 5px 9px grey;
 }
