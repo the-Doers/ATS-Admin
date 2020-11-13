@@ -97,14 +97,14 @@ app.get("/deletePassenger", (req, res) => {
 
 app.post("/deletePassenger", (req, res) => {
   const pid = req.body.PID;
-  var message = "";
   connection.query(
     "DELETE FROM PassengerDetails WHERE PID=" + connection.escape(pid),
     (error, result, fields) => {
       if (error) throw error;
       else {
-        message =
-          "Deleted details of " + req.body.PFName + " " + req.body.PLName;
+        var message =
+          "Deleted details of Passenger ID " + connection.escape(pid);
+        console.log(result)
         res.render("./success", { message: message });
       }
     }
