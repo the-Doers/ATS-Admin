@@ -62,7 +62,7 @@ app.get("/issueTicket", (req, res) => {
 app.post("/issueTicket", (req, res) => {
   const startStation = req.body.ss;
   const endStation = req.body.es;
-  const fare = Math.abs(startStation - endStation);
+  const fare = Math.abs(startStation - endStation) * 10;
   const dateAndTime = new Date();
   console.log(dateAndTime);
   connection.query(
@@ -74,13 +74,15 @@ app.post("/issueTicket", (req, res) => {
       } else {
         console.log(result.insertId);
         res.render("./ticketDetails", {
-          insertID: result.insertId,
+          ticketID: result.insertId,
           fare: fare,
         });
       }
     }
   );
 });
+
+//_______________________________VIEW ISSUED TICKETS____________________________________//
 
 //_______________________________DELETE PASSENGER_______________________________//
 app.get("/deletePassenger", (req, res) => {
