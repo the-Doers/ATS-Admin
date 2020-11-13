@@ -1,22 +1,36 @@
 <%- include("partials/header") -%>
-<div class="card">
-  <div class="card-body">
-    <h1 class="card-title">Passenger Details:</h1>
-    <p class="card-text">Passenger ID: <%- data[0].PID %> </p>
-    <p class="card-text">Name: <%- data[0].PFName %> <%- data[0].PLName %></p>
-            <p class="card-text">Phone Number: <%- data[0].PhoneNo %> </p>
-    <p class="card-text">Email ID: <%- data[0].EmailID %></p>
+<h1>Passenger Details:</h1>
+<div class="row">
+  <div class="col-xs-6">
+    Passenger ID: <%- data[0].PID %>
+  </div>
+  <div class="col-xs-6">
+    Name: <%- data[0].PFName %> <%- data[0].PLName %>
   </div>
 </div>
+<div class="row">
+  <div class="col-xs-6">
+    Phone Number: <%- data[0].PhoneNo %>
+  </div>
+  <div class="col-xs-6">
+    Email ID: <%- data[0].EmailID %>
+  </div>
+</div>
+<div class="row">
+  <% data1.forEach(ele => { %>
+  <div class="col-xs-4">
+    <div class="card">
+      <div class="card-body">
+        <p class="card-text">Ticket ID: <%- ele.TicketID %> </p>
+        <p class="card-text">Start ID: <%- ele.StartID %>
+        <p class="card-text">Start Time: <%- ele.StartTime %>
+        <p class="card-text">End ID: <%- ele.EndID %> </p>
+        <p class="card-text">End Time: <%- ele.EndTime %>
+        <p class="card-text">Fare: <%- ele.Fare %></p>
+      </div>
+    </div>
+  </div>
+  <% }); %>
+</div>
 
-
-</div>
-<div class="footer-padding">
-<div class="footer footer-bottom">
-  <p>Made by theDoers</p>
-</div>
-</div>
-</div>
-</body>
-
-</html>
+<%- include("partials/footer") -%>

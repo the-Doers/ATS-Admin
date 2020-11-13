@@ -132,7 +132,11 @@ app.post("/viewPassengerDetails", (req, res) => {
     "SELECT * FROM PassengerDetails WHERE PID=" + connection.escape(pid),
     (error, result, fields) => {
       if (error) throw error;
-      res.render("passengerDetails", { data: result });
+      connection.query("SELECT * FROM TravelRecord WHERE PID=" + connection.escape(pid), (error1, result1, fields1) => {
+        if (error1) throw error1;
+        console.log(result)
+        res.render("passengerDetails", { data: result, data1: result1 });
+      });
     }
   );
 });
