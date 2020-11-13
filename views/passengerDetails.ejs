@@ -2,11 +2,12 @@
 <h1>Passenger Details:</h1>
 <div class="row">
   <div class="col-xs-6">
-    Passenger ID: <%- data[0].PID %>
-  </div>
-  <div class="col-xs-6">
     Name: <%- data[0].PFName %> <%- data[0].PLName %>
   </div>
+  <div class="col-xs-6">
+    Passenger ID: <%- data[0].PID %>
+  </div>
+
 </div>
 <div class="row">
   <div class="col-xs-6">
@@ -22,10 +23,13 @@
     <div class="card">
       <div class="card-body">
         <p class="card-text">Ticket ID: <%- ele.TicketID %> </p>
-        <p class="card-text">Start ID: <%- ele.StartID %>
+        <% data2.forEach(ele1=>{ if(ele1.SID===ele.StartID){%>
+        <p class="card-text">Start Station: <%- ele1.SName %>
+          <%}})%>
         <p class="card-text">Start Time: <%- ele.StartTime %>
-        <p class="card-text">End ID: <%- ele.EndID %> </p>
-        <p class="card-text">End Time: <%- ele.EndTime %>
+          <% data2.forEach(ele1=>{ if(ele1.SID===ele.EndID){%>
+        <p class="card-text">End Station: <%- ele1.SName %>
+          <%}})%>
         <p class="card-text">Fare: <%- ele.Fare %></p>
       </div>
     </div>
