@@ -82,8 +82,6 @@ app.post("/issueTicket", (req, res) => {
   );
 });
 
-//_______________________________VIEW ISSUED TICKETS____________________________________//
-
 //_______________________________DELETE PASSENGER_______________________________//
 app.get("/deletePassenger", (req, res) => {
   connection.query(
@@ -97,14 +95,14 @@ app.get("/deletePassenger", (req, res) => {
 
 app.post("/deletePassenger", (req, res) => {
   const pid = req.body.PID;
+  var message = "";
   connection.query(
     "DELETE FROM PassengerDetails WHERE PID=" + connection.escape(pid),
     (error, result, fields) => {
       if (error) throw error;
       else {
-        var message =
-          "Deleted details of Passenger ID " + connection.escape(pid);
-        console.log(result)
+        message =
+          "Deleted details of " + req.body.PFName + " " + req.body.PLName;
         res.render("./success", { message: message });
       }
     }
