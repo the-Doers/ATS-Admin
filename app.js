@@ -1,12 +1,11 @@
 const express = require("express");
-const https = require("https");
 const bodyParser = require("body-parser");
-const ejs = require("ejs");
-const _ = require("lodash");
 let mysql = require("mysql");
-const { result } = require("lodash");
-
+const multer = require('multer');
 const app = express();
+var upload = multer({ dest: 'uploads/' })
+
+var cpUpload = upload.fields([{ name: 'avatar', maxCount: 8 }])
 
 let connection = mysql.createConnection({
   host: "remotemysql.com",
@@ -47,8 +46,23 @@ app.get("/addPassenger", (req, res) => {
   res.render("addPassenger");
 });
 
-app.post("/addPassenger", (req, res) => {
-  res.render("addPassenger");
+app.post("/addPassenger", cpUpload, (req, res) => {
+  const PFName = req.body.fname;
+  const PLName = req.body.lname;
+  const PhoneNo = req.body.number;
+  const EmailID = req.body.email;
+  let file = "";
+  req.files['avatar'].forEach(ele => {
+    var name = ele.filename.toString();
+    file = file.concat(name);
+  })
+  console.log(file)
+  connection.query("INSERT INTO PassengerDetails (PFName,PLName,PhoneNo,EmailID,FileID) VALUES (?)", [[PFName, PLName, PhoneNo, EmailID, file]], (error, result) => {
+    if (error) throw error;
+    else {
+      res.render("success", { message: "Added Passenger into Database succesfully" });
+    }
+  });
 });
 
 //_______________________________ISSUE TICKET_______________________________//
@@ -82,8 +96,6 @@ app.post("/issueTicket", (req, res) => {
   );
 });
 
-//_______________________________VIEW ISSUED TICKETS____________________________________//
-
 //_______________________________DELETE PASSENGER_______________________________//
 app.get("/deletePassenger", (req, res) => {
   connection.query(
@@ -111,8 +123,32 @@ app.post("/deletePassenger", (req, res) => {
   );
 });
 
+//_______________________________UPDATE PASSENGER DETAILS_______________________________//
 app.get("/update", (req, res) => {
   res.render("update");
+});
+
+app.post("/update", (req, res) => {
+  const PID = req.body.PID;
+  const PFName = req.body.fname;
+  const PLName = req.body.lname;
+  const PhoneNo = req.body.number;
+  const EmailID = req.body.email;
+  connection.query("UPDATE PassengerDetails SET PFName=" +
+    connection.escape(PFName) +
+    ",PLName=" +
+    connection.escape(PLName) +
+    ",PhoneNo=" +
+    connection.escape(PhoneNo) +
+    ",EmailID=" +
+    connection.escape(EmailID) +
+    "WHERE PID=" +
+    connection.escape(PID), (error, result) => {
+      if (error) throw error;
+      else {
+        res.render("success", { message: "Updated Passenger in Database succesfully" });
+      }
+    });
 });
 
 //_______________________________VIEW PASSENGER DETAILS_______________________________//
@@ -141,10 +177,6 @@ app.post("/viewPassengerDetails", (req, res) => {
         });
       });
     });
-});
-
-app.get("/error", (req, res) => {
-  res.render("error");
 });
 
 app.listen(process.env.PORT || 3000, () => {
