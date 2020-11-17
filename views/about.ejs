@@ -1,4 +1,48 @@
 <%- include("partials/header") -%>
-<h1>About Me</h1>
-<p> <%- aboutPageContent %> </p>
+<h1>IMPLEMENTATION:</h1>
+<ul>
+    <li>
+        The passenger has to first register at one of the centers, wherein a few of
+        his photos are captured and details like name, mobile, email are fed to the
+        system.
+    </li>
+    <li>
+        The passenger is allowed to choose between wallet or bank account which is
+        then going to be linked with a unique key generated for the passenger.
+    </li>
+    <li>
+        When the passenger enters the premises, at the security check, his face is
+        scanned and is then identified by facial recognition model.
+    </li>
+    <li>
+        The model returns the unique ID to the server which adds the starting point
+        to the passengers record in the database.
+    </li>
+    <li>
+        After the travel is complete, the passenger's face is scanned again and the
+        ID is fed to the server.
+    </li>
+    <li>
+        The Server then adds the terminal point in the passengers record after which
+        the fare is calculated and is deducted from the passengers linked account.
+    </li>
+    <li>
+        The travel is then updated in the database for the sake of record keeping.
+    </li>
+    <li>We’ve opted for the three-tier architecture:</li>
+    <ol>
+        <li>
+            Front-End: For adding and accessing the passenger details, also issuing
+            tokens to have a re-scan in rare cases.
+        </li>
+        <li>
+            Back-End: The Server adds travel records, calculates fare, issues warnings
+            and is used to access the database.
+        </li>
+        <li>
+            Database: The Database is used to store all passenger details like images
+            which are required for faceNet model to ID passengers
+        </li>
+    </ol>
+</ul>
 <%- include("partials/footer") -%>
