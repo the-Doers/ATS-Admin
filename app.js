@@ -6,6 +6,7 @@ const app = express();
 var upload = multer({ dest: 'uploads/' })
 
 var cpUpload = upload.fields([{ name: 'avatar', maxCount: 8 }])
+var loggedIn = false;
 
 let connection = mysql.createConnection({
   host: "remotemysql.com",
@@ -33,17 +34,37 @@ app.post("/", (req, res) => {
   const name = req.body.userName;
   const pw = req.body.pw;
   if (name === "admin" && pw === "root") {
-    res.render("home", { status: "ok" });
+    res.render("home");
+    loggedIn = true;
   }
 });
 
-app.get("/home", (req, res) => {
-  res.render("home");
+app.get("/logout", (req, res) => {
+  isLoggedIn = false;
+  res.redirect("/");
 });
+
+
+app.get("/home", (req, res) => {
+  if (loggedIn) {
+    res.render("home");
+  } else {
+    res.redirect("/")
+  }
+});
+app.post("/home", (req, res) => {
+  console.log(loggedIn)
+  res.render("home")
+})
 
 //_______________________________ADD PASSENGER_______________________________//
 app.get("/addPassenger", (req, res) => {
-  res.render("addPassenger");
+  if (loggedIn) {
+    res.render("addPassenger");
+  } else {
+    res.redirect("/")
+  }
+
 });
 
 app.post("/addPassenger", cpUpload, (req, res) => {
@@ -67,10 +88,15 @@ app.post("/addPassenger", cpUpload, (req, res) => {
 
 //_______________________________ISSUE TICKET_______________________________//
 app.get("/issueTicket", (req, res) => {
-  connection.query("select * from Stations", (error, result, fields) => {
-    if (error) throw error;
-    res.render("./issueTicket", { data: result });
-  });
+  if (loggedIn) {
+    connection.query("select * from Stations", (error, result, fields) => {
+      if (error) throw error;
+      res.render("./issueTicket", { data: result });
+    });
+  } else {
+    res.redirect("/")
+  }
+
 });
 
 app.post("/issueTicket", (req, res) => {
@@ -98,13 +124,18 @@ app.post("/issueTicket", (req, res) => {
 
 //_______________________________DELETE PASSENGER_______________________________//
 app.get("/deletePassenger", (req, res) => {
-  connection.query(
-    "select * from PassengerDetails",
-    (error, result, fields) => {
-      if (error) throw error;
-      res.render("deletePassenger", { data: result });
-    }
-  );
+  if (loggedIn) {
+    connection.query(
+      "select * from PassengerDetails",
+      (error, result, fields) => {
+        if (error) throw error;
+        res.render("deletePassenger", { data: result });
+      }
+    );
+  } else {
+    res.redirect("/")
+  }
+
 });
 
 app.post("/deletePassenger", (req, res) => {
@@ -125,7 +156,12 @@ app.post("/deletePassenger", (req, res) => {
 
 //_______________________________UPDATE PASSENGER DETAILS_______________________________//
 app.get("/update", (req, res) => {
-  res.render("update");
+  if (loggedIn) {
+    res.render("update");
+  } else {
+    res.redirect("/")
+  }
+
 });
 
 app.post("/update", (req, res) => {
@@ -153,13 +189,18 @@ app.post("/update", (req, res) => {
 
 //_______________________________VIEW PASSENGER DETAILS_______________________________//
 app.get("/viewPassengerDetails", (req, res) => {
-  connection.query(
-    "select * from PassengerDetails",
-    (error, result, fields) => {
-      if (error) throw error;
-      res.render("./viewPassengerDetails", { data: result });
-    }
-  );
+  if (loggedIn) {
+    connection.query(
+      "select * from PassengerDetails",
+      (error, result, fields) => {
+        if (error) throw error;
+        res.render("./viewPassengerDetails", { data: result });
+      }
+    );
+  } else {
+    res.redirect("/")
+  }
+
 });
 
 app.post("/viewPassengerDetails", (req, res) => {
