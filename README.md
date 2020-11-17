@@ -60,5 +60,5 @@ For further communication, you can contact the authors:
 
 - [Dyuthi](mailto:nityaa55@gmail.com) => website
 - [Likith](mailto:likithsrinath2000@gmail.com) => website
-- [Khushwinder] (mailto:khushwinder99@gmail.com) => facial recognition
-- [Bhumika] (mailto:bhumidshetty2000@gmail.com) => facial recognition
+- [Khushwinder](mailto:khushwinder99@gmail.com) => facial recognition
+- [Bhumika](mailto:bhumidshetty2000@gmail.com) => facial recognition
