@@ -5,11 +5,7 @@ const multer = require("multer");
 const app = express();
 var upload = multer({ dest: "uploads/" });
 
-<<<<<<< HEAD
-var cpUpload = upload.fields([{ name: "avatar", maxCount: 8 }]);
-=======
 var cpUpload = upload.fields([{ name: 'avatar', maxCount: 8 }])
->>>>>>> 32292a46e7f04082f717eb35012928ee2661c53b
 var loggedIn = false;
 
 let connection = mysql.createConnection({
@@ -48,25 +44,12 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 32292a46e7f04082f717eb35012928ee2661c53b
 app.get("/home", (req, res) => {
   if (loggedIn) {
     res.render("home");
   } else {
-<<<<<<< HEAD
-    res.redirect("/");
-  }
-});
-app.post("/home", (req, res) => {
-  console.log(loggedIn);
-  res.render("home");
-=======
     res.redirect("/")
   }
->>>>>>> 32292a46e7f04082f717eb35012928ee2661c53b
 });
 app.post("/home", (req, res) => {
   console.log(loggedIn)
@@ -78,14 +61,9 @@ app.get("/addPassenger", (req, res) => {
   if (loggedIn) {
     res.render("addPassenger");
   } else {
-<<<<<<< HEAD
-    res.redirect("/");
-  }
-=======
     res.redirect("/")
   }
 
->>>>>>> 32292a46e7f04082f717eb35012928ee2661c53b
 });
 
 app.post("/addPassenger", cpUpload, (req, res) => {
@@ -121,14 +99,9 @@ app.get("/issueTicket", (req, res) => {
       res.render("./issueTicket", { data: result });
     });
   } else {
-<<<<<<< HEAD
-    res.redirect("/");
-  }
-=======
     res.redirect("/")
   }
 
->>>>>>> 32292a46e7f04082f717eb35012928ee2661c53b
 });
 
 app.post("/issueTicket", (req, res) => {
@@ -165,14 +138,9 @@ app.get("/deletePassenger", (req, res) => {
       }
     );
   } else {
-<<<<<<< HEAD
-    res.redirect("/");
-  }
-=======
     res.redirect("/")
   }
 
->>>>>>> 32292a46e7f04082f717eb35012928ee2661c53b
 });
 
 app.post("/deletePassenger", (req, res) => {
@@ -196,14 +164,9 @@ app.get("/update", (req, res) => {
   if (loggedIn) {
     res.render("update");
   } else {
-<<<<<<< HEAD
-    res.redirect("/");
-  }
-=======
     res.redirect("/")
   }
 
->>>>>>> 32292a46e7f04082f717eb35012928ee2661c53b
 });
 
 app.post("/update", (req, res) => {
@@ -214,15 +177,15 @@ app.post("/update", (req, res) => {
   const EmailID = req.body.email;
   connection.query(
     "UPDATE PassengerDetails SET PFName=" +
-      connection.escape(PFName) +
-      ",PLName=" +
-      connection.escape(PLName) +
-      ",PhoneNo=" +
-      connection.escape(PhoneNo) +
-      ",EmailID=" +
-      connection.escape(EmailID) +
-      "WHERE PID=" +
-      connection.escape(PID),
+    connection.escape(PFName) +
+    ",PLName=" +
+    connection.escape(PLName) +
+    ",PhoneNo=" +
+    connection.escape(PhoneNo) +
+    ",EmailID=" +
+    connection.escape(EmailID) +
+    "WHERE PID=" +
+    connection.escape(PID),
     (error, result) => {
       if (error) throw error;
       else {
@@ -245,14 +208,9 @@ app.get("/viewPassengerDetails", (req, res) => {
       }
     );
   } else {
-<<<<<<< HEAD
-    res.redirect("/");
-  }
-=======
     res.redirect("/")
   }
 
->>>>>>> 32292a46e7f04082f717eb35012928ee2661c53b
 });
 
 app.post("/viewPassengerDetails", (req, res) => {
