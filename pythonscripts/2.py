@@ -1,7 +1,7 @@
 import mysql.connector
 import os
 import shutil
-parent_dir = "D:/Web Development/Metro2/Metro-Project/uploads/"
+parent_dir = "D:/WebDev/College Projects/Metro Project/Metro-Admin/uploads/"
 mydb = mysql.connector.connect(
     host="remotemysql.com",
     user="jsdmPgLJ0k",
