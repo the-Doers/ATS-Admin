@@ -67,10 +67,7 @@ app.get("/addPassenger", (req, res) => {
 });
 
 app.post("/addPassenger", cpUpload, (req, res) => {
-  const PFName = req.body.fname;
-  const PLName = req.body.lname;
-  const PhoneNo = req.body.number;
-  const EmailID = req.body.email;
+  const PID = req.body.PID;
   let file = "";
   req.files["avatar"].forEach((ele) => {
     var name = ele.filename.toString();
@@ -78,13 +75,12 @@ app.post("/addPassenger", cpUpload, (req, res) => {
   });
   console.log(file);
   connection.query(
-    "INSERT INTO PassengerDetails (PFName,PLName,PhoneNo,EmailID,FileID) VALUES (?)",
-    [[PFName, PLName, PhoneNo, EmailID, file]],
+    "UPDATE PassengerDetails SET FileID =" + connection.escape(file),
     (error, result) => {
       if (error) throw error;
       else {
         res.render("success", {
-          message: "Added Passenger into Database succesfully",
+          message: "Added Passenger Images into Database succesfully",
         });
       }
     }
